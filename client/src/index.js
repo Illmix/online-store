@@ -1,0 +1,24 @@
+import React, {createContext} from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import UserStore from "./store/UserStore";
+import DeviceStore from "./store/DeviceStore";
+import {DevSupport} from "@react-buddy/ide-toolbox";
+import {ComponentPreviews, useInitial} from "./dev";
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+export const Context = createContext(null)
+root.render(
+    <Context.Provider value={{
+        user: new UserStore(),
+        device: new DeviceStore()
+    }}>
+        <DevSupport ComponentPreviews={ComponentPreviews}
+                    useInitialHook={useInitial}
+        >
+            <App/>
+        </DevSupport>
+    </Context.Provider>
+);
+
